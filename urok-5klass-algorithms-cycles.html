@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Информатика 5 класс: Линейные и циклические алгоритмы. Способы записи алгоритмов</title>
+  <style>
+    :root {
+      --bg: #f0f9ff;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #dbeafe;
+      --accent: #0d9488;
+      --accent-light: #ccfbf1;
+      --success: #059669;
+      --success-light: #d1fae5;
+      --warning: #d97706;
+      --warning-light: #fef3c7;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --radius: 16px;
+      --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+    }
+
+    .topbar-inner {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .topbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .date-pill {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .timer-box {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.35s ease;
+    }
+
+    .nav-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-top: 10px;
+      scrollbar-width: none;
+    }
+
+    .nav-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pill {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      min-height: 44px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .nav-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .nav-pill.done {
+      border-color: var(--success);
+      color: var(--success);
+      background: var(--success-light);
+    }
+
+    .nav-pill.active.done {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 20px auto 0;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(203, 213, 225, 0.75);
+    }
+
+    .module {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 1.54rem;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.28rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    h3 {
+      font-size: 1.06rem;
+      margin: 16px 0 8px;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    ul, ol {
+      margin: 8px 0 14px 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    code {
+      font-family: "Courier New", Courier, monospace;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.92em;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .time-tag {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .callout {
+      background: var(--surface-soft);
+      border-left: 4px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 0 12px 12px 0;
+      margin: 14px 0;
+    }
+
+    .callout.warn {
+      border-left-color: var(--warning);
+      background: var(--warning-light);
+    }
+
+    .callout.success {
+      border-left-color: var(--success);
+      background: var(--success-light);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .info-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .info-box strong {
+      display: block;
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+      color: var(--primary-dark);
+    }
+
+    .interactive-zone {
+      background: #f8fafc;
+      border: 2px dashed #93c5fd;
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .interactive-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      min-height: 44px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+
+    .btn-success {
+      background: var(--success);
+    }
+
+    .btn-success:hover {
+      background: #047857;
+    }
+
+    .btn-sm {
+      padding: 8px 14px;
+      min-height: 44px;
+      font-size: 0.88rem;
+      border-radius: 9px;
+    }
+
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 11px 14px;
+      min-height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      margin: 8px 0 12px;
+    }
+
+    /* Ментальная карта способов записи */
+    .mindmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .mm-node {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      min-height: 44px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: inherit;
+      color: var(--text);
+    }
+
+    .mm-node:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .mm-node.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 3px 12px rgba(37, 99, 235, 0.14);
+    }
+
+    .mm-node-title {
+      font-weight: 800;
+      font-size: 0.94rem;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .mm-node-sub {
+      font-size: 0.81rem;
+      color: var(--text-muted);
+    }
+
+    /* Карточки выбора */
+    .sort-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+
+    .sort-item-text {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .sort-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .choice-btn {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      min-height: 44px;
+      border-radius: 9px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .choice-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .choice-btn.selected {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .choice-btn.correct {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .choice-btn.wrong {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    /* SVG сцены */
+    .svg-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin: 12px 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    .svg-box svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .svg-click {
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .svg-click:hover {
+      opacity: 0.84;
+    }
+
+    /* Панель программы цикла (Модуль 3) */
+    .loop-editor {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-family: "Courier New", Courier, monospace;
+      margin: 12px 0;
+    }
+
+    .loop-header {
+      color: #38bdf8;
+      font-weight: 800;
+      font-size: 0.96rem;
+      margin-bottom: 8px;
+    }
+
+    .loop-body-box {
+      border-left: 4px solid #38bdf8;
+      padding-left: 12px;
+      margin-left: 8px;
+      min-height: 46px;
+      color: #34d399;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .loop-footer {
+      color: #38bdf8;
+      font-weight: 800;
+      font-size: 0.96rem;
+      margin-top: 8px;
+    }
+
+    /* Конструктор блок-схемы */
+    .order-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .order-chip {
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      color: var(--primary-dark);
+      padding: 9px 14px;
+      min-height: 44px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s;
+    }
+
+    .order-chip:hover {
+      background: var(--primary-light);
+    }
+
+    .order-slot {
+      background: var(--surface);
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .order-slot.filled {
+      border-style: solid;
+      border-color: var(--primary);
+      color: var(--text);
+      background: #fff;
+    }
+
+    /* Тест */
+    .quiz-q {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 11px 14px;
+      min-height: 44px;
+      margin-top: 8px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.93rem;
+      transition: all 0.15s;
+    }
+
+    .quiz-opt:hover {
+      border-color: var(--primary);
+    }
+
+    .quiz-opt.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .quiz-opt.correct {
+      border-color: var(--success);
+      background: var(--success-light);
+      color: #065f46;
+      font-weight: 700;
+    }
+
+    .quiz-opt.wrong {
+      border-color: var(--danger);
+      background: var(--danger-light);
+      color: #991b1b;
+    }
+
+    .quiz-explain {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.87rem;
+      background: var(--warning-light);
+      border-left: 3px solid var(--warning);
+      color: #78350f;
+    }
+
+    /* Карточка результата */
+    .cert-box {
+      border: 3px solid var(--primary);
+      background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .cert-date-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin: 6px 0 4px;
+    }
+
+    .cert-grade {
+      display: inline-block;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--success);
+      background: var(--success-light);
+      padding: 8px 24px;
+      border-radius: 12px;
+      margin: 12px 0;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 0.93rem;
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 16px; }
+      h1 { font-size: 1.32rem; }
+      h2 { font-size: 1.16rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-row">
+        <span class="badge">Информатика • 5 класс</span>
+        <span class="date-pill">Дата: 26.11.2026</span>
+        <span class="timer-box" id="timerDisplay">Время: 00:00 / 45:00</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+      <nav class="nav-pills" id="navPills">
+        <button class="nav-pill active" onclick="goToStep(0)">Старт</button>
+        <button class="nav-pill" onclick="goToStep(1)">1. Способы записи</button>
+        <button class="nav-pill" onclick="goToStep(2)">2. Линейные и циклы</button>
+        <button class="nav-pill" onclick="goToStep(3)">3. Симулятор Робота</button>
+        <button class="nav-pill" onclick="goToStep(4)">4. Итоговый контроль</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ШАГ 0: ВВЕДЕНИЕ -->
+    <section class="module active" id="step-0">
+      <div class="card">
+        <span class="time-tag">Самостоятельный урок • 45 минут • 26 ноября 2026 г.</span>
+        <h1>Линейные и циклические алгоритмы. Способы записи алгоритмов</h1>
+        <p>Каждый день мы выполняем множество <strong>алгоритмов</strong> — чётких пошаговых планов действий: собираем рюкзак, решаем задачу по математике или готовим завтрак. Чтобы алгоритм можно было сохранить, передать другому человеку или загрузить в компьютер, его нужно правильно записать.</p>
+        <p>На этом уроке ты узнаешь о <strong>четырёх способах записи алгоритмов</strong>, научишься читать <strong>блок-схемы</strong>, отличишь <strong>линейный алгоритм</strong> от <strong>циклического</strong> и запрограммируешь виртуального Робота-Сборщика с помощью цикла!</p>
+
+        <div class="callout">
+          <strong>План нашего урока (45 минут):</strong><br />
+          1. Изучить способы записи алгоритмов и геометрические фигуры блок-схем.<br />
+          2. Разобраться, чем линейный алгоритм отличается от цикла, и рассортировать 5 примеров.<br />
+          3. Настроить цикл для Робота-Сборщика, собрать блок-схему и пройти тест (8 вопросов).
+        </div>
+
+        <label for="studentNameInput"><strong>Введи фамилию, имя и класс перед началом:</strong></label>
+        <input type="text" id="studentNameInput" class="input-field" placeholder="Например: Соколов Артём, 5-А" />
+
+        <div class="nav-footer">
+          <span></span>
+          <button class="btn" onclick="startLesson()">Начать урок →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ШАГ 1: СПОСОБЫ ЗАПИСИ АЛГОРИТМОВ И БЛОК-СХЕМЫ -->
+    <section class="module" id="step-1">
+      <div class="card">
+        <span class="time-tag">Модуль 1 • Рекомендуемое время: 11 минут</span>
+        <h2>1. Способы записи алгоритмов и фигуры блок-схем</h2>
+        <p>Один и тот же алгоритм можно оформить по-разному — выбор зависит от того, <em>кто</em> будет его исполнять: человек или компьютер. Нажимай на карточки ментальной карты, чтобы изучить все 4 способа:</p>
+
+        <div class="mindmap-grid" id="waysMindmap">
+          <button class="mm-node active" onclick="showWayNode('text', this)">
+            <div class="mm-node-title">1. Словесный</div>
+            <div class="mm-node-sub">Обычными словами</div>
+          </button>
+          <button class="mm-node" onclick="showWayNode('graph', this)">
+            <div class="mm-node-title">2. Графический</div>
+            <div class="mm-node-sub">Блок-схемы и стрелки</div>
+          </button>
+          <button class="mm-node" onclick="showWayNode('table', this)">
+            <div class="mm-node-title">3. Табличный</div>
+            <div class="mm-node-sub">Строки и столбцы</div>
+          </button>
+          <button class="mm-node" onclick="showWayNode('prog', this)">
+            <div class="mm-node-title">4. Программный</div>
+            <div class="mm-node-sub">Язык программирования</div>
+          </button>
+        </div>
+
+        <div class="callout" id="wayNodeDetail"></div>
+
+        <div class="interactive-zone">
+          <div class="interactive-title">Интерактивный справочник: Главные фигуры блок-схемы</div>
+          <p style="font-size: 0.92rem;">В графическом способе каждая фигура имеет строго своё значение. <strong>Нажимай на фигуры ниже</strong> (или на кнопки), чтобы запомнить их:</p>
+
+          <div class="svg-box">
+            <svg viewBox="0 0 560 112" style="max-width:560px;">
+              <!-- 1. Овал -->
+              <g class="svg-click" onclick="showBlockInfo('oval')">
+                <rect x="18" y="26" width="110" height="46" rx="23" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.5" />
+                <text x="73" y="54" font-size="13" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Начало / Конец</text>
+                <text x="73" y="96" font-size="11" font-weight="bold" text-anchor="middle" fill="#475569">1. Овал</text>
+              </g>
+              <!-- 2. Параллелограмм -->
+              <g class="svg-click" onclick="showBlockInfo('para')">
+                <polygon points="164,26 266,26 250,72 148,72" fill="#ccfbf1" stroke="#0d9488" stroke-width="2.5" />
+                <text x="207" y="54" font-size="12" font-weight="bold" text-anchor="middle" fill="#115e59">Ввод / Вывод</text>
+                <text x="207" y="96" font-size="11" font-weight="bold" text-anchor="middle" fill="#475569">2. Параллелограмм</text>
+              </g>
+              <!-- 3. Прямоугольник -->
+              <g class="svg-click" onclick="showBlockInfo('rect')">
+                <rect x="292" y="26" width="114" height="46" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.5" />
+                <text x="349" y="54" font-size="13" font-weight="bold" text-anchor="middle" fill="#065f46">Действие</text>
+                <text x="349" y="96" font-size="11" font-weight="bold" text-anchor="middle" fill="#475569">3. Прямоугольник</text>
+              </g>
+              <!-- 4. Ромб -->
+              <g class="svg-click" onclick="showBlockInfo('rhomb')">
+                <polygon points="484,18 542,49 484,80 426,49" fill="#fef3c7" stroke="#d97706" stroke-width="2.5" />
+                <text x="484" y="53" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">Условие?</text>
+                <text x="484" y="96" font-size="11" font-weight="bold" text-anchor="middle" fill="#475569">4. Ромб</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="sort-buttons" style="justify-content: center; margin-bottom: 10px;" id="blockBtns">
+            <button class="choice-btn selected" onclick="showBlockInfo('oval', this)">1. Овал</button>
+            <button class="choice-btn" onclick="showBlockInfo('para', this)">2. Параллелограмм</button>
+            <button class="choice-btn" onclick="showBlockInfo('rect', this)">3. Прямоугольник</button>
+            <button class="choice-btn" onclick="showBlockInfo('rhomb', this)">4. Ромб</button>
+          </div>
+
+          <div class="info-box" id="blockInfoDesc"></div>
+
+          <hr style="margin: 18px 0; border: none; border-top: 1px solid var(--border);" />
+
+          <div class="interactive-title">Мини-проверка: Способы записи и блоки</div>
+          <div id="m1Container"></div>
+          <button class="btn btn-sm" onclick="checkM1()">Проверить ответы</button>
+          <div class="feedback" id="m1Feedback"></div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="btn btn-secondary" onclick="goToStep(0)">← Назад</button>
+          <button class="btn" onclick="goToStep(2)">Дальше: Линейные и циклические алгоритмы →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ШАГ 2: ЛИНЕЙНЫЕ И ЦИКЛИЧЕСКИЕ АЛГОРИТМЫ -->
+    <section class="module" id="step-2">
+      <div class="card">
+        <span class="time-tag">Модуль 2 • Рекомендуемое время: 12 минут</span>
+        <h2>2. Линейные и циклические алгоритмы</h2>
+        <p>По тому, в каком порядке выполняются команды, различают базовые алгоритмические конструкции. Сегодня мы подробно разберём две из них:</p>
+
+        <div class="grid-2">
+          <div class="info-box" style="border-left: 4px solid var(--primary);">
+            <strong>Линейный алгоритм</strong>
+            Все команды выполняются <strong>строго по порядку</strong>, одна за другой, без пропусков и повторений. Каждый шаг исполняется ровно <strong>один раз</strong>.
+          </div>
+          <div class="info-box" style="border-left: 4px solid var(--accent);">
+            <strong>Циклический алгоритм (цикл)</strong>
+            Алгоритм, в котором одна или несколько команд <strong>повторяются многократно</strong> (заданное число раз или пока выполняется условие). Повторяющиеся команды называют <strong>телом цикла</strong>.
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <strong>Зачем программистам нужны циклы?</strong><br />
+          Представь, что Роботу нужно посадить 50 деревьев вдоль аллеи. В линейном алгоритме пришлось бы вручную писать 100 одинаковых строк! А с помощью цикла достаточно всего двух строк: <code>Повтори 50 раз: [Шаг вперёд; Посади дерево]</code>.
+        </div>
+
+        <div class="interactive-zone">
+          <div class="interactive-title">Интерактивное сравнение блок-схем</div>
+          <p style="font-size: 0.92rem;">Переключай вкладки ниже, чтобы увидеть разницу в структуре линейной и циклической блок-схемы:</p>
+
+          <div class="sort-buttons" style="justify-content: center; margin-bottom: 10px;" id="schemeTabs">
+            <button class="choice-btn selected" onclick="showSchemeDemo('linear', this)">1. Линейный алгоритм</button>
+            <button class="choice-btn" onclick="showSchemeDemo('cycle', this)">2. Циклический алгоритм</button>
+          </div>
+
+          <div class="svg-box" id="schemeDemoSvg"></div>
+          <div class="info-box" id="schemeDemoDesc"></div>
+
+          <hr style="margin: 18px 0; border: none; border-top: 1px solid var(--border);" />
+
+          <div class="interactive-title">Тренажёр: Определи вид алгоритма (Линейный или Циклический)</div>
+          <p style="font-size: 0.92rem;">Прочитай 5 ситуаций из жизни и информатики и выбери верный вид алгоритма:</p>
+          <div id="m2Container"></div>
+          <button class="btn btn-sm" onclick="checkM2()">Проверить сортировку</button>
+          <div class="feedback" id="m2Feedback"></div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="btn btn-secondary" onclick="goToStep(1)">← Назад</button>
+          <button class="btn" onclick="goToStep(3)">Дальше: Симулятор Робота →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ШАГ 3: СИМУЛЯТОР ЦИКЛА И КОНСТРУКТОР БЛОК-СХЕМЫ -->
+    <section class="module" id="step-3">
+      <div class="card">
+        <span class="time-tag">Модуль 3 • Рекомендуемое время: 14 минут</span>
+        <h2>3. Практикум: Программируем цикл для Робота и собираем блок-схему</h2>
+
+        <div class="interactive-zone">
+          <div class="interactive-title">Практикум 3.1: Симулятор цикла «Робот-Сборщик»</div>
+          <p style="font-size: 0.92rem;"><strong>Миссия:</strong> Робот стоит на клетке <strong>0 (Старт)</strong>. Впереди на клетках <strong>1, 2, 3, 4</strong> лежат <strong>4 синих кристалла</strong>, а за клеткой 4 находится стена. Задай нужное <strong>количество повторений (N)</strong> и добавь <strong>2 команды в тело цикла</strong> в правильном порядке, чтобы собрать все 4 кристалла и не врезаться в стену!</p>
+
+          <div class="svg-box" id="robotTrackSvg"></div>
+
+          <div style="margin-bottom: 10px;">
+            <strong>1. Выбери число повторений цикла (N):</strong>
+            <div class="sort-buttons" style="margin-top: 6px;" id="loopCountBtns">
+              <button class="choice-btn" onclick="setLoopN(2, this)">2 раза</button>
+              <button class="choice-btn selected" onclick="setLoopN(3, this)">3 раза</button>
+              <button class="choice-btn" onclick="setLoopN(4, this)">4 раза</button>
+              <button class="choice-btn" onclick="setLoopN(5, this)">5 раз</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 10px;">
+            <strong>2. Собери тело цикла (добавь до 2 команд по порядку):</strong>
+            <div class="sort-buttons" style="margin-top: 6px;">
+              <button class="btn btn-sm btn-secondary" onclick="addLoopCmd('Шаг вперёд')">+ Шаг вперёд</button>
+              <button class="btn btn-sm btn-secondary" onclick="addLoopCmd('Взять кристалл')">+ Взять кристалл</button>
+              <button class="btn btn-sm btn-secondary" onclick="addLoopCmd('Шаг назад')">+ Шаг назад</button>
+              <button class="btn btn-sm btn-secondary" onclick="clearLoopBody()">Очистить тело</button>
+            </div>
+          </div>
+
+          <div class="loop-editor">
+            <div class="loop-header" id="loopHeaderCode">Повторить 3 раз(а):</div>
+            <div class="loop-body-box" id="loopBodyCode">(тело цикла пусто — добавь команды выше)</div>
+            <div class="loop-footer">Конец цикла</div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <button class="btn btn-sm btn-success" id="btnRunLoop" onclick="runRobotLoop()">▶ Запустить цикл</button>
+            <button class="btn btn-sm btn-secondary" onclick="resetRobotTrack()">⟲ Вернуть Робота на старт</button>
+          </div>
+          <div class="feedback" id="m3aFeedback"></div>
+
+          <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border);" />
+
+          <div class="interactive-title">Практикум 3.2: Собери линейную блок-схему вычисления площади прямоугольника</div>
+          <p style="font-size: 0.92rem;">Нажимай на блоки в правильном порядке от «Начала» до «Конца» (1 → 5):</p>
+
+          <div class="order-pool" id="orderPool"></div>
+          <div id="orderSlots">
+            <div class="order-slot" id="slot-0">Шаг 1: ...</div>
+            <div class="order-slot" id="slot-1">Шаг 2: ...</div>
+            <div class="order-slot" id="slot-2">Шаг 3: ...</div>
+            <div class="order-slot" id="slot-3">Шаг 4: ...</div>
+            <div class="order-slot" id="slot-4">Шаг 5: ...</div>
+          </div>
+
+          <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-sm btn-secondary" onclick="resetOrder()">Сбросить</button>
+            <button class="btn btn-sm" onclick="checkOrder()">Проверить блок-схему</button>
+          </div>
+          <div class="feedback" id="m3bFeedback"></div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="btn btn-secondary" onclick="goToStep(2)">← Назад</button>
+          <button class="btn" onclick="goToStep(4)">Перейти к итоговому контролю →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ШАГ 4: ИТОГОВЫЙ КОНТРОЛЬ -->
+    <section class="module" id="step-4">
+      <div class="card">
+        <span class="time-tag">Модуль 4 • Рекомендуемое время: 8 минут</span>
+        <h2>4. Итоговый контроль знаний</h2>
+        <p>Ответь на 8 вопросов по всем разделам урока. После проверки ты увидишь пояснения к ошибочным ответам и получишь именную карточку с оценкой.</p>
+
+        <div id="finalQuizContainer"></div>
+
+        <button class="btn btn-success" style="width: 100%; margin-top: 10px;" onclick="finishLesson()">Завершить урок и получить оценку</button>
+
+        <div id="certificateSection" style="display: none;">
+          <div class="cert-box">
+            <div style="font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700;">
+              Карточка прохождения урока • Информатика 5 класс
+            </div>
+            <div class="cert-date-badge">Дата урока: 26 ноября 2026 г. (26.11.2026)</div>
+            <h2 id="certStudentName" style="margin: 8px 0; color: var(--text);">Ученик 5 класса</h2>
+            <p style="margin-bottom: 4px;">Тема: «Линейные и циклические алгоритмы. Способы записи алгоритмов»</p>
+            <div class="cert-grade" id="certGradeText">Оценка: 5 (Отлично)</div>
+            <p id="certStats" style="font-weight: 600;"></p>
+            <p id="certPracticeSummary" style="font-size: 0.9rem; color: var(--text-muted);"></p>
+            <p id="certCode" style="font-family: monospace; font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;"></p>
+            <div class="callout success" style="text-align: left; margin-top: 12px;">
+              Сделай скриншот этой карточки и отправь учителю для выставления оценки в журнал!
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="btn btn-secondary" onclick="goToStep(3)">← Вернуться к практикуму</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetAll()">Пройти заново</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // --- СОСТОЯНИЕ УРОКА ---
+    const state = {
+      currentStep: 0,
+      completedSteps: [false, false, false, false, false],
+      secondsElapsed: 0,
+      studentName: "",
+      robot: { pos: 0, collected: [], loopN: 3, body: [], running: false, timer: null, crashed: false },
+      m3aDone: false,
+      m3bDone: false
+    };
+
+    // --- ТАЙМЕР ---
+    setInterval(() => {
+      state.secondsElapsed++;
+      const m = String(Math.floor(state.secondsElapsed / 60)).padStart(2, "0");
+      const s = String(state.secondsElapsed % 60).padStart(2, "0");
+      document.getElementById("timerDisplay").textContent = `Время: ${m}:${s} / 45:00`;
+    }, 1000);
+
+    // --- НАВИГАЦИЯ ---
+    function goToStep(idx) {
+      document.querySelectorAll(".module").forEach((el, i) => el.classList.toggle("active", idx === i));
+      document.querySelectorAll(".nav-pill").forEach((pill, i) => {
+        pill.classList.toggle("active", idx === i);
+        pill.classList.toggle("done", state.completedSteps[i]);
+      });
+      state.currentStep = idx;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function markStepDone(idx) {
+      state.completedSteps[idx] = true;
+      const pills = document.querySelectorAll(".nav-pill");
+      if (pills[idx]) pills[idx].classList.add("done");
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const done = state.completedSteps.filter(Boolean).length;
+      const pct = Math.min(100, Math.round((done / 4) * 100));
+      document.getElementById("progressBar").style.width = `${pct}%`;
+    }
+
+    function startLesson() {
+      const val = document.getElementById("studentNameInput").value.trim();
+      state.studentName = val || "Ученик 5 класса";
+      markStepDone(0);
+      goToStep(1);
+    }
+
+    // --- УНИВЕРСАЛЬНЫЙ РЕНДЕР ТРЕНАЖЁРОВ ---
+    const sortStorage = { m1Container: {}, m2Container: {} };
+
+    function buildSortModule(containerId, items, options) {
+      const box = document.getElementById(containerId);
+      box.innerHTML = "";
+      items.forEach((item, idx) => {
+        const div = document.createElement("div");
+        div.className = "sort-item";
+        div.innerHTML = `
+          <div class="sort-item-text"><strong>${idx + 1}.</strong> ${item.text}</div>
+          <div class="sort-buttons" id="${containerId}-btns-${idx}">
+            ${options.map(opt => `
+              <button class="choice-btn" onclick="selectSortOption('${containerId}', ${idx}, '${opt}', this)">${opt}</button>
+            `).join("")}
+          </div>
+        `;
+        box.appendChild(div);
+      });
+    }
+
+    function selectSortOption(containerId, idx, opt, btn) {
+      sortStorage[containerId][idx] = opt;
+      const group = document.getElementById(`${containerId}-btns-${idx}`);
+      group.querySelectorAll(".choice-btn").forEach(b => b.classList.remove("selected", "correct", "wrong"));
+      btn.classList.add("selected");
+    }
+
+    function evaluateSortModule(containerId, items, feedbackId, onSuccess) {
+      let ok = 0;
+      items.forEach((item, idx) => {
+        const group = document.getElementById(`${containerId}-btns-${idx}`);
+        const chosen = sortStorage[containerId][idx];
+        group.querySelectorAll(".choice-btn").forEach(b => {
+          b.classList.remove("selected", "correct", "wrong");
+          if (b.textContent === chosen) {
+            if (chosen === item.answer) {
+              b.classList.add("correct");
+              ok++;
+            } else {
+              b.classList.add("wrong");
+            }
+          }
+        });
+      });
+      const fb = document.getElementById(feedbackId);
+      if (ok === items.length) {
+        fb.style.color = "var(--success)";
+        fb.textContent = `Отлично! Все ${ok} из ${items.length} ответов верны!`;
+        if (onSuccess) onSuccess();
+      } else {
+        fb.style.color = "var(--warning)";
+        fb.textContent = `Правильно: ${ok} из ${items.length}. Исправь выделенные красным пункты.`;
+      }
+    }
+
+    // --- МОДУЛЬ 1: СПОСОБЫ ЗАПИСИ И ФИГУРЫ БЛОК-СХЕМ ---
+    const waysInfo = {
+      text: "<strong>1. Словесный (текстовый) способ:</strong> команды записываются на обычном разговорном языке в виде пронумерованного списка шагов. <em>Пример:</em> кулинарный рецепт, памятка «Как перейти дорогу».",
+      graph: "<strong>2. Графический способ (блок-схема):</strong> алгоритм изображается наглядно в виде связанных стрелками геометрических фигур (блоков). Очень удобен для человека — сразу видны все переходы и повторения!",
+      table: "<strong>3. Табличный способ:</strong> последовательность действий и данные оформляются в виде таблицы со строками и столбцами. <em>Пример:</em> таблица умножения, расписание уроков, таблица расчётов в электронной таблице.",
+      prog: "<strong>4. Программный способ:</strong> запись алгоритма на строгом языке программирования (Python, КуМир, Scratch), понятном компьютеру для автоматического исполнения."
+    };
+
+    function showWayNode(key, btn) {
+      document.querySelectorAll("#waysMindmap .mm-node").forEach(el => el.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      document.getElementById("wayNodeDetail").innerHTML = waysInfo[key];
+    }
+    showWayNode("text");
+
+    const blockDetails = {
+      oval: "<strong>1. Овал (терминатор):</strong> обозначает <em>Начало</em> или <em>Конец</em> алгоритма. Любая правильная блок-схема начинается овалом «Начало» и заканчивается овалом «Конец».",
+      para: "<strong>2. Параллелограмм (блок ввода-вывода):</strong> обозначает получение исходных данных (например, <code>Ввести a, b</code>) или вывод готового результата на экран (<code>Вывести S</code>).",
+      rect: "<strong>3. Прямоугольник (блок действия / процесса):</strong> обозначает выполнение конкретной команды или вычисления (например, <code>S = a × b</code>, <code>Шаг вперёд</code>).",
+      rhomb: "<strong>4. Ромб (блок условия / проверки):</strong> проверяет вопрос с ответами «Да» или «Нет» (например, <code>Все 4 кристалла собраны?</code>). Используется в ветвлениях и циклах."
+    };
+
+    function showBlockInfo(key, btn) {
+      const btns = document.getElementById("blockBtns").querySelectorAll(".choice-btn");
+      btns.forEach(b => b.classList.remove("selected"));
+      if (btn) {
+        btn.classList.add("selected");
+      } else {
+        const idx = ["oval", "para", "rect", "rhomb"].indexOf(key);
+        if (idx >= 0 && btns[idx]) btns[idx].classList.add("selected");
+      }
+      document.getElementById("blockInfoDesc").innerHTML = blockDetails[key];
+    }
+    showBlockInfo("oval");
+
+    const m1Data = [
+      { text: "Кулинарный рецепт приготовления блинов, записанный в тетради по шагам 1, 2, 3...", answer: "Словесный способ" },
+      { text: "Алгоритм в виде геометрических фигур, соединённых стрелками", answer: "Графический (блок-схема)" },
+      { text: "Фигура блок-схемы, в которую записывают слова «Начало» и «Конец»", answer: "Овал" },
+      { text: "Фигура блок-схемы для записи команды действия или вычисления формулы", answer: "Прямоугольник" },
+      { text: "Фигура блок-схемы, предназначенная для ввода исходных чисел и вывода ответа", answer: "Параллелограмм" }
+    ];
+    buildSortModule("m1Container", m1Data, [
+      "Словесный способ",
+      "Графический (блок-схема)",
+      "Овал",
+      "Прямоугольник",
+      "Параллелограмм"
+    ]);
+    function checkM1() {
+      evaluateSortModule("m1Container", m1Data, "m1Feedback", () => markStepDone(1));
+    }
+
+    // --- МОДУЛЬ 2: СРАВНЕНИЕ БЛОК-СХЕМ И СОРТИРОВЩИК ---
+    function showSchemeDemo(type, btn) {
+      if (btn) {
+        document.getElementById("schemeTabs").querySelectorAll(".choice-btn").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+      }
+
+      const svgBox = document.getElementById("schemeDemoSvg");
+      const descBox = document.getElementById("schemeDemoDesc");
+
+      if (type === "linear") {
+        svgBox.innerHTML = `
+          <svg viewBox="0 0 340 245" style="max-width:340px;">
+            <rect x="115" y="10" width="110" height="34" rx="17" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.2" />
+            <text x="170" y="32" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Начало</text>
+            <line x1="170" y1="44" x2="170" y2="62" stroke="#475569" stroke-width="2.2" />
+            <polygon points="165,58 170,66 175,58" fill="#475569" />
+
+            <rect x="85" y="66" width="170" height="36" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.2" />
+            <text x="170" y="89" font-size="12" font-weight="bold" text-anchor="middle" fill="#065f46">1. Налить воду в чайник</text>
+            <line x1="170" y1="102" x2="170" y2="120" stroke="#475569" stroke-width="2.2" />
+            <polygon points="165,116 170,124 175,116" fill="#475569" />
+
+            <rect x="85" y="124" width="170" height="36" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.2" />
+            <text x="170" y="147" font-size="12" font-weight="bold" text-anchor="middle" fill="#065f46">2. Включить чайник</text>
+            <line x1="170" y1="160" x2="170" y2="178" stroke="#475569" stroke-width="2.2" />
+            <polygon points="165,174 170,182 175,174" fill="#475569" />
+
+            <rect x="115" y="182" width="110" height="34" rx="17" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.2" />
+            <text x="170" y="204" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Конец</text>
+          </svg>
+        `;
+        descBox.innerHTML = "<strong>Линейная структура:</strong> стрелки идут строго сверху вниз, без возвратов назад. Каждая команда выполняется один раз в заданной последовательности.";
+      } else {
+        svgBox.innerHTML = `
+          <svg viewBox="0 0 420 250" style="max-width:420px;">
+            <rect x="145" y="8" width="110" height="32" rx="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.2" />
+            <text x="200" y="29" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Начало</text>
+            <line x1="200" y1="40" x2="200" y2="56" stroke="#475569" stroke-width="2.2" />
+            <polygon points="195,52 200,60 205,52" fill="#475569" />
+
+            <!-- Ромб условия цикла -->
+            <polygon points="200,60 282,92 200,124 118,92" fill="#fef3c7" stroke="#d97706" stroke-width="2.2" />
+            <text x="200" y="96" font-size="11" font-weight="bold" text-anchor="middle" fill="#92400e">Яблоки остались?</text>
+
+            <!-- Ветвь ДА -> Тело цикла -->
+            <line x1="200" y1="124" x2="200" y2="146" stroke="#059669" stroke-width="2.2" />
+            <polygon points="195,142 200,150 205,142" fill="#059669" />
+            <text x="216" y="138" font-size="11" font-weight="bold" fill="#059669">Да</text>
+
+            <rect x="115" y="150" width="170" height="38" rx="4" fill="#d1fae5" stroke="#059669" stroke-width="2.2" />
+            <text x="200" y="173" font-size="11" font-weight="bold" text-anchor="middle" fill="#065f46">Положить яблоко (Тело цикла)</text>
+
+            <!-- Стрелка возврата цикла -->
+            <polyline points="115,169 65,169 65,92 112,92" fill="none" stroke="#0d9488" stroke-width="2.5" />
+            <polygon points="108,87 118,92 108,97" fill="#0d9488" />
+            <text x="58" y="135" font-size="10" font-weight="bold" text-anchor="end" fill="#0d9488">Повтор</text>
+
+            <!-- Ветвь НЕТ -> Конец -->
+            <polyline points="282,92 355,92 355,214 261,214" fill="none" stroke="#dc2626" stroke-width="2.2" />
+            <polygon points="265,209 255,214 265,219" fill="#dc2626" />
+            <text x="315" y="84" font-size="11" font-weight="bold" fill="#dc2626">Нет</text>
+
+            <rect x="145" y="198" width="110" height="32" rx="16" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.2" />
+            <text x="200" y="219" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">Конец</text>
+          </svg>
+        `;
+        descBox.innerHTML = "<strong>Циклическая структура:</strong> обрати внимание на бирюзовую стрелку возврата! Пока условие истинно («Да»), исполнитель снова и снова выполняет <em>тело цикла</em>. Как только условие нарушилось («Нет»), цикл завершается.";
+      }
+    }
+    showSchemeDemo("linear");
+
+    const m2Data = [
+      { text: "Вычислить периметр треугольника: сложить длины сторон a, b и c и записать ответ.", answer: "Линейный алгоритм" },
+      { text: "Приседать на уроке физкультуры ровно 15 раз подряд по команде учителя.", answer: "Циклический алгоритм" },
+      { text: "Налить воду в чашку, опустить пакетик чая, добавить ложку сахара и размешать.", answer: "Линейный алгоритм" },
+      { text: "Смена времён года (зима → весна → лето → осень), повторяющаяся из года в год.", answer: "Циклический алгоритм" },
+      { text: "Черепаха рисует квадрат: 4 раза повторяет команды «Вперёд 60» и «Направо 90».", answer: "Циклический алгоритм" }
+    ];
+    buildSortModule("m2Container", m2Data, ["Линейный алгоритм", "Циклический алгоритм"]);
+    function checkM2() {
+      evaluateSortModule("m2Container", m2Data, "m2Feedback", () => markStepDone(2));
+    }
+
+    // --- МОДУЛЬ 3.1: СИМУЛЯТОР ЦИКЛА «РОБОТ-СБОРЩИК» ---
+    function renderRobotTrack(iterInfo = "Готов к запуску") {
+      const r = state.robot;
+      const cellW = 86;
+      const startX = 28;
+      let svg = `<svg viewBox="0 0 510 135" style="max-width:510px;">`;
+
+      // Клетки 0..4
+      for (let i = 0; i < 5; i++) {
+        const x = startX + i * cellW;
+        const hasCrystal = i >= 1 && i <= 4 && !r.collected.includes(i);
+        const fill = i === 0 ? "#eff6ff" : (r.collected.includes(i) ? "#d1fae5" : "#f8fafc");
+        svg += `<rect x="${x}" y="30" width="${cellW - 4}" height="74" rx="10" fill="${fill}" stroke="#94a3b8" stroke-width="2" />`;
+        svg += `<text x="${x + (cellW - 4) / 2}" y="122" font-size="11" font-weight="bold" text-anchor="middle" fill="#475569">${i === 0 ? "0 (Старт)" : "Клетка " + i}</text>`;
+
+        if (hasCrystal) {
+          const cx = x + (cellW - 4) / 2;
+          svg += `<polygon points="${cx},46 ${cx + 14},66 ${cx},86 ${cx - 14},66" fill="#38bdf8" stroke="#0284c7" stroke-width="2" />`;
+          svg += `<polygon points="${cx},52 ${cx + 7},66 ${cx},80 ${cx - 7},66" fill="#bae6fd" />`;
+        } else if (i >= 1 && r.collected.includes(i)) {
+          const cx = x + (cellW - 4) / 2;
+          svg += `<text x="${cx}" y="72" font-size="18" font-weight="bold" text-anchor="middle" fill="#059669">✓</text>`;
+        }
+      }
+
+      // Стена справа
+      const wallX = startX + 5 * cellW;
+      svg += `<rect x="${wallX}" y="24" width="28" height="84" rx="4" fill="#dc2626" stroke="#991b1b" stroke-width="2" />`;
+      svg += `<text x="${wallX + 14}" y="122" font-size="10" font-weight="bold" text-anchor="middle" fill="#dc2626">Стена</text>`;
+
+      // Отрисовка Робота
+      const clampedPos = Math.max(0, Math.min(4, r.pos));
+      const rx = startX + clampedPos * cellW + (cellW - 4) / 2 + (r.crashed ? 32 : 0);
+      const ry = 67;
+      svg += `
+        <g>
+          <rect x="${rx - 20}" y="${ry - 19}" width="40" height="36" rx="9" fill="${r.crashed ? '#dc2626' : '#2563eb'}" stroke="#1e3a8a" stroke-width="2.5" />
+          <circle cx="${rx - 7}" cy="${ry - 5}" r="4" fill="#fde047" />
+          <circle cx="${rx + 7}" cy="${ry - 5}" r="4" fill="#fde047" />
+          <rect x="${rx - 9}" y="${ry + 6}" width="18" height="4" rx="2" fill="#ffffff" />
+          <line x1="${rx}" y1="${ry - 19}" x2="${rx}" y2="${ry - 27}" stroke="#1e3a8a" stroke-width="2.5" />
+          <circle cx="${rx}" cy="${ry - 28}" r="3.5" fill="#f59e0b" />
+        </g>
+      `;
+
+      // Заголовок-статус
+      svg += `<text x="255" y="18" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e3a8a">${iterInfo} • Собрано кристаллов: ${r.collected.length} из 4</text>`;
+      svg += `</svg>`;
+      document.getElementById("robotTrackSvg").innerHTML = svg;
+    }
+
+    function updateLoopCodeUI() {
+      document.getElementById("loopHeaderCode").textContent = `Повторить ${state.robot.loopN} раз(а):`;
+      const bodyEl = document.getElementById("loopBodyCode");
+      if (state.robot.body.length === 0) {
+        bodyEl.textContent = "(тело цикла пусто — добавь команды выше)";
+      } else {
+        bodyEl.innerHTML = state.robot.body.map((c, i) => `${i + 1}. ${c}`).join("<br />");
+      }
+    }
+
+    function setLoopN(n, btn) {
+      if (state.robot.running) return;
+      state.robot.loopN = n;
+      document.getElementById("loopCountBtns").querySelectorAll(".choice-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      updateLoopCodeUI();
+    }
+
+    function addLoopCmd(cmd) {
+      if (state.robot.running) return;
+      if (state.robot.body.length >= 2) {
+        document.getElementById("m3aFeedback").style.color = "var(--warning)";
+        document.getElementById("m3aFeedback").textContent = "В тело цикла помещается ровно 2 команды. Нажми «Очистить тело», чтобы изменить их.";
+        return;
+      }
+      state.robot.body.push(cmd);
+      document.getElementById("m3aFeedback").textContent = "";
+      updateLoopCodeUI();
+    }
+
+    function clearLoopBody() {
+      if (state.robot.running) return;
+      state.robot.body = [];
+      document.getElementById("m3aFeedback").textContent = "";
+      updateLoopCodeUI();
+    }
+
+    function resetRobotTrack() {
+      if (state.robot.timer) clearInterval(state.robot.timer);
+      state.robot.pos = 0;
+      state.robot.collected = [];
+      state.robot.running = false;
+      state.robot.crashed = false;
+      document.getElementById("m3aFeedback").textContent = "";
+      renderRobotTrack("Робот на старте");
+    }
+
+    function runRobotLoop() {
+      if (state.robot.running) return;
+      const fb = document.getElementById("m3aFeedback");
+      if (state.robot.body.length === 0) {
+        fb.style.color = "var(--warning)";
+        fb.textContent = "Сначала добавь команды в тело цикла!";
+        return;
+      }
+
+      state.robot.pos = 0;
+      state.robot.collected = [];
+      state.robot.crashed = false;
+      state.robot.running = true;
+      renderRobotTrack("Старт цикла...");
+
+      const queue = [];
+      for (let it = 1; it <= state.robot.loopN; it++) {
+        state.robot.body.forEach(cmd => queue.push({ it, cmd }));
+      }
+
+      let idx = 0;
+      let emptyPickWarn = false;
+
+      state.robot.timer = setInterval(() => {
+        if (idx >= queue.length) {
+          clearInterval(state.robot.timer);
+          state.robot.running = false;
+
+          if (state.robot.collected.length === 4) {
+            state.m3aDone = true;
+            fb.style.color = "var(--success)";
+            fb.textContent = "Отлично! Цикл «Повторить 4 раза: Шаг вперёд → Взять кристалл» собрал все 4 кристалла без ошибок!";
+            if (state.m3aDone && state.m3bDone) markStepDone(3);
+          } else {
+            fb.style.color = "var(--warning)";
+            fb.textContent = `Собрано кристаллов: ${state.robot.collected.length} из 4.` +
+              (emptyPickWarn ? " Подсказка: на клетке 0 кристалла нет — сначала нужно сделать шаг вперёд!" : " Попробуй изменить число повторений цикла.");
+          }
+          return;
+        }
+
+        const step = queue[idx];
+        if (step.cmd === "Шаг вперёд") {
+          state.robot.pos++;
+          if (state.robot.pos > 4) {
+            state.robot.crashed = true;
+            clearInterval(state.robot.timer);
+            state.robot.running = false;
+            renderRobotTrack(`Повтор ${step.it}: столкновение со стеной!`);
+            fb.style.color = "var(--danger)";
+            fb.textContent = "Ой! Робот врезался в стену — число повторений слишком велико! Попробуй 4 повторения.";
+            return;
+          }
+        } else if (step.cmd === "Шаг назад") {
+          if (state.robot.pos > 0) state.robot.pos--;
+        } else if (step.cmd === "Взять кристалл") {
+          if (state.robot.pos >= 1 && state.robot.pos <= 4 && !state.robot.collected.includes(state.robot.pos)) {
+            state.robot.collected.push(state.robot.pos);
+          } else {
+            emptyPickWarn = true;
+          }
+        }
+
+        renderRobotTrack(`Повтор ${step.it} из ${state.robot.loopN}: ${step.cmd}`);
+        idx++;
+      }, 360);
+    }
+
+    renderRobotTrack("Робот на старте");
+    updateLoopCodeUI();
+
+    // --- МОДУЛЬ 3.2: КОНСТРУКТОР ЛИНЕЙНОЙ БЛОК-СХЕМЫ ---
+    const orderSteps = [
+      { id: "s1", label: "[Овал] Начало алгоритма" },
+      { id: "s2", label: "[Параллелограмм] Ввести длину a и ширину b" },
+      { id: "s3", label: "[Прямоугольник] Вычислить площадь S = a × b" },
+      { id: "s4", label: "[Параллелограмм] Вывести результат S на экран" },
+      { id: "s5", label: "[Овал] Конец алгоритма" }
+    ];
+    const correctSequence = ["s1", "s2", "s3", "s4", "s5"];
+    let userSequence = [];
+
+    function initOrder() {
+      const pool = document.getElementById("orderPool");
+      pool.innerHTML = "";
+      const shuffled = [...orderSteps].sort(() => Math.random() - 0.5);
+      shuffled.forEach(item => {
+        pool.innerHTML += `<button class="order-chip" id="chip-${item.id}" onclick="pickOrderStep('${item.id}', '${item.label}')">${item.label}</button>`;
+      });
+    }
+
+    function pickOrderStep(id, label) {
+      if (userSequence.length >= 5 || userSequence.includes(id)) return;
+      userSequence.push(id);
+      document.getElementById(`chip-${id}`).style.display = "none";
+      const idx = userSequence.length - 1;
+      const slot = document.getElementById(`slot-${idx}`);
+      slot.classList.add("filled");
+      slot.textContent = `Шаг ${idx + 1}: ${label}`;
+    }
+
+    function resetOrder() {
+      userSequence = [];
+      document.querySelectorAll(".order-chip").forEach(el => el.style.display = "inline-block");
+      for (let i = 0; i < 5; i++) {
+        const slot = document.getElementById(`slot-${i}`);
+        slot.classList.remove("filled");
+        slot.style.borderColor = "";
+        slot.textContent = `Шаг ${i + 1}: ...`;
+      }
+      document.getElementById("m3bFeedback").textContent = "";
+    }
+
+    function checkOrder() {
+      if (userSequence.length < 5) {
+        document.getElementById("m3bFeedback").style.color = "var(--warning)";
+        document.getElementById("m3bFeedback").textContent = "Сначала расставь все 5 блоков блок-схемы!";
+        return;
+      }
+      let ok = 0;
+      for (let i = 0; i < 5; i++) {
+        const slot = document.getElementById(`slot-${i}`);
+        if (userSequence[i] === correctSequence[i]) {
+          slot.style.borderColor = "var(--success)";
+          ok++;
+        } else {
+          slot.style.borderColor = "var(--danger)";
+        }
+      }
+      const fb = document.getElementById("m3bFeedback");
+      if (ok === 5) {
+        state.m3bDone = true;
+        fb.style.color = "var(--success)";
+        fb.textContent = "Верно! Линейная блок-схема вычисления площади собрана идеально.";
+        if (state.m3aDone && state.m3bDone) markStepDone(3);
+      } else {
+        fb.style.color = "var(--danger)";
+        fb.textContent = "Есть ошибки (красные рамки). Вспомни порядок: Начало → Ввод → Вычисление → Вывод → Конец.";
+      }
+    }
+    initOrder();
+
+    // --- МОДУЛЬ 4: ИТОГОВЫЙ ТЕСТ С РАЗБОРОМ ОШИБОК ---
+    const quizData = [
+      {
+        q: "1. Как называется способ записи алгоритма с помощью геометрических фигур, соединённых стрелками?",
+        options: ["Словесный", "Графический (блок-схема)", "Табличный"],
+        correct: 1,
+        explain: "Графическая форма представления алгоритма называется блок-схемой."
+      },
+      {
+        q: "2. Какая геометрическая фигура в блок-схеме обозначает Начало и Конец алгоритма?",
+        options: ["Овал", "Ромб", "Прямоугольник"],
+        correct: 0,
+        explain: "Начало и Конец любого алгоритма в блок-схеме помещают в овал (скруглённый прямоугольник)."
+      },
+      {
+        q: "3. Какая фигура в блок-схеме используется для записи команды действия или вычисления формулы?",
+        options: ["Овал", "Прямоугольник", "Ромб"],
+        correct: 1,
+        explain: "Прямоугольник — это блок процесса (выполнения действия или расчёта)."
+      },
+      {
+        q: "4. Какой алгоритм называют линейным?",
+        options: [
+          "Алгоритм, в котором команды выполняются строго друг за другом по порядку, каждая ровно один раз",
+          "Алгоритм, в котором одна и та же команда повторяется много раз",
+          "Алгоритм, записанный только в одну строчку"
+        ],
+        correct: 0,
+        explain: "В линейном алгоритме нет ни ветвлений, ни повторений — шаги идут строго последовательно."
+      },
+      {
+        q: "5. Как называется группа команд, которая многократно повторяется внутри циклического алгоритма?",
+        options: ["Начало алгоритма", "Тело цикла", "Линейный шаг"],
+        correct: 1,
+        explain: "Повторяющиеся внутри цикла команды называют телом цикла."
+      },
+      {
+        q: "6. Какой из примеров относится к циклическому алгоритму?",
+        options: [
+          "Сложить два числа 7 и 8",
+          "Полить 5 цветочных горшков на подоконнике один за другим",
+          "Нажать кнопку выключения компьютера"
+        ],
+        correct: 1,
+        explain: "Полив 5 горшков подряд представляет собой 5-кратное повторение одного и того же действия — это цикл."
+      },
+      {
+        q: "7. Исходное число равно 2. Выполни линейный алгоритм: 1) Прибавь 3; 2) Умножь результат на 4; 3) Вычти 5. Какое число получится?",
+        options: ["12", "15", "20"],
+        correct: 1,
+        explain: "Считаем строго по шагам: 2 + 3 = 5; 5 × 4 = 20; 20 − 5 = 15."
+      },
+      {
+        q: "8. У Робота в корзине было 0 яблок. Он выполнил циклический алгоритм: «Повтори 4 раза: положи в корзину 3 яблока». Сколько яблок стало в корзине?",
+        options: ["7 яблок", "12 яблок", "16 яблок"],
+        correct: 1,
+        explain: "Тело цикла «положить 3 яблока» выполнилось 4 раза: 3 × 4 = 12 яблок."
+      }
+    ];
+    const quizAnswers = {};
+
+    function renderQuiz() {
+      const box = document.getElementById("finalQuizContainer");
+      box.innerHTML = "";
+      quizData.forEach((item, qIdx) => {
+        const div = document.createElement("div");
+        div.className = "quiz-q";
+        div.innerHTML = `
+          <div><strong>${item.q}</strong></div>
+          <div id="quiz-opts-${qIdx}">
+            ${item.options.map((opt, oIdx) => `
+              <button class="quiz-opt" onclick="selectQuiz(${qIdx}, ${oIdx}, this)">${opt}</button>
+            `).join("")}
+          </div>
+          <div class="quiz-explain" id="quiz-exp-${qIdx}"><strong>Пояснение:</strong> ${item.explain}</div>
+        `;
+        box.appendChild(div);
+      });
+    }
+
+    function selectQuiz(qIdx, oIdx, btn) {
+      quizAnswers[qIdx] = oIdx;
+      const box = document.getElementById(`quiz-opts-${qIdx}`);
+      box.querySelectorAll(".quiz-opt").forEach(b => b.classList.remove("selected", "correct", "wrong"));
+      btn.classList.add("selected");
+    }
+
+    function finishLesson() {
+      if (Object.keys(quizAnswers).length < quizData.length) {
+        alert("Ответь на все 8 вопросов теста перед завершением урока!");
+        return;
+      }
+
+      let score = 0;
+      quizData.forEach((item, qIdx) => {
+        const chosen = quizAnswers[qIdx];
+        const box = document.getElementById(`quiz-opts-${qIdx}`);
+        const exp = document.getElementById(`quiz-exp-${qIdx}`);
+        box.querySelectorAll(".quiz-opt").forEach((b, oIdx) => {
+          b.classList.remove("selected", "correct", "wrong");
+          if (oIdx === item.correct) b.classList.add("correct");
+          else if (oIdx === chosen && chosen !== item.correct) b.classList.add("wrong");
+        });
+        if (chosen === item.correct) {
+          score++;
+          exp.style.display = "none";
+        } else {
+          exp.style.display = "block";
+        }
+      });
+
+      const pct = Math.round((score / quizData.length) * 100);
+      let grade = 2;
+      let label = "Нужно повторить тему";
+      if (score >= 7) { grade = 5; label = "Отлично"; }
+      else if (score >= 5) { grade = 4; label = "Хорошо"; }
+      else if (score >= 4) { grade = 3; label = "Удовлетворительно"; }
+
+      markStepDone(4);
+      const mins = Math.max(1, Math.round(state.secondsElapsed / 60));
+      const practiceDone = [state.completedSteps[1], state.completedSteps[2], state.completedSteps[3]].filter(Boolean).length;
+      const code = `INF5-ALGCYC-261126-${score}${grade}`;
+
+      document.getElementById("certStudentName").textContent = state.studentName || "Ученик 5 класса";
+      document.getElementById("certGradeText").textContent = `Оценка: ${grade} (${label})`;
+      document.getElementById("certStats").textContent = `Тест: ${score} из ${quizData.length} (${pct}%) • Время работы: ~${mins} мин.`;
+      document.getElementById("certPracticeSummary").textContent = `Выполнено практических модулей: ${practiceDone} из 3`;
+      document.getElementById("certCode").textContent = `Код проверки: ${code}`;
+      document.getElementById("certificateSection").style.display = "block";
+      document.getElementById("certificateSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetAll() {
+      if (confirm("Сбросить прогресс и пройти урок заново?")) {
+        location.reload();
+      }
+    }
+
+    renderQuiz();
+  </script>
+</body>
+</html>
